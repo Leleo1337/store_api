@@ -1,0 +1,26 @@
+{
+  "name": "store_api",
+  "version": "1.0.0",
+  "description": "store api",
+  "homepage": "https://github.com/Leleo1337/store_api#readme",
+  "bugs": {
+    "url": "https://github.com/Leleo1337/store_api/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Leleo1337/store_api.git"
+  },
+  "license": "ISC",
+  "author": "leleo1337",
+  "type": "module",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon src/app.js"
+  },
+  "dependencies": {
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0",
+    "nodemon": "^3.1.10"
+  }
+}
