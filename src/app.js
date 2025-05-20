@@ -1,30 +1,36 @@
-import express from 'express'
-import dotenv from 'dotenv'
-import notFound from './middlewares/not-found.js'
-import errorHandlerMiddleware from './middlewares/error-handler.js'
+import express from "express";
+import dotenv from "dotenv";
+import notFound from "./middlewares/not-found.js";
+import errorHandlerMiddleware from "./middlewares/error-handler.js";
+import connectDB from "./db/connect.js";
+import productsRouter from "./routes/products.js";
+dotenv.config();
 
-dotenv.config()
-const app = express()
-const PORT = 3000
+const app = express();
 
-app.use(express.json())
+app.use(express.json());
 
-//routes 
-app.get('/', (req,res) => {
-    res.send('<h1>Store API</h1> <a href="/api/v1/products">products route</a>')
-} )
+//routes
+app.get("/", (req, res) => {
+    res.send('<h1>Store API</h1> <a href="/api/v1/products">products route</a>');
+});
 
-//middleware
-app.use(notFound)
-app.use(errorHandlerMiddleware)
+app.use("/api/v1/products", productsRouter);
 
-async function start(){
-    try{
-        // connectDB
-        app.listen(PORT, () => console.log(`server listening on port ${PORT}`))
-    } catch(error){
-        console.log(error)
-    }
+// products route
+
+app.use(notFound);
+app.use(errorHandlerMiddleware);
+
+const PORT = process.env.PORT;
+
+async function start() {
+   try {
+      await connectDB(process.env.DATABASE_ACCESS);
+      app.listen(PORT, () => console.log(`server listening on port ${PORT}`));
+   } catch (error) {
+      console.log(error);
+   }
 }
 
-start()
+start();
